@@ -9,7 +9,7 @@ env:
   - TOXENV=py27-django15-pyparsing2
   - TOXENV=py27-django16-pyparsing2
   - TOXENV=py27-django17-pyparsing2
-  - TOXENV=py27-django16-pyparsing1
+  - TOXENV=py27-django16-pyparsing1 s
   - TOXENV=docs
   - TOXENV=lint
 
@@ -22,7 +22,7 @@ install:
 script:
   - tox -e $TOXENV
 
-before_deploy: mkdir artifacts && tar -cvzf artifacts/graphite-web.tar.gz graphite-web
+before_deploy: cd $HOME && mkdir artifacts && tar -cvzf artifacts/graphite-web.tar.gz graphite-web
 deploy:
   provider: s3
   access_key_id:
