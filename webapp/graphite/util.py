@@ -59,7 +59,7 @@ def epoch(dt):
   if not dt.tzinfo:
     tb = traceback.extract_stack(None, 2)
     log.warning('epoch() called with non-timezone-aware datetime in %s at %s:%d' % (tb[0][2], tb[0][0], tb[0][1]))
-    return calendar.timegm(make_aware(dt, pytz.timezone(settings.TIME_ZONE)).astimezone(pytz.utc).timetuple())
+    return calendar.timegm(pytz.timezone(settings.TIME_ZONE).localize(dt, is_dst=None).astimezone(pytz.utc).timetuple())
   return calendar.timegm(dt.astimezone(pytz.utc).timetuple())
 
 
